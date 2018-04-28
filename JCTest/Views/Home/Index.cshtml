@@ -1,5 +1,18 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = "~/Views/Shared/_LayoutWide.cshtml";
+    ViewBag.Title = "Welcome";
 }
 
-<h2>Index</h2>
+<div class="page-wrapper">
+    <div class="panel panel-default col-xs-12 col-sm-6 col-md-5">
+        <div class="panel-body">
+            <h2>Welcome to Plastrd!</h2>
+
+            <div class="btns">
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-block">Login</a>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-block">Register</a>
+            </div>
+        </div>
+    </div>
+</div>

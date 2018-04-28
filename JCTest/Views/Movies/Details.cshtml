@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAlternative.cshtml";
+    ViewBag.Title = "Details";
+
+    JCTest.Models.Movies.MovieInfo movieInfo = ViewBag.movieInfo;
+    System.Net.TMDb.Movie movieData = ViewBag.movieData;
+}
+<div class="movie-details">
+    <div class="header-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <img src="@movieInfo.GetPosterUrl("medium")" class="movie-details-img" alt="@movieInfo.Title" />
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <h2>@movieInfo.Title</h2>
+
+                    <h4>Overview</h4>
+                    <p>@movieData.Overview</p>
+
+                    <h4>Featured Crew</h4>
+                    <div class="row">
+                        @foreach (var c in movieData.Credits.Crew.Take(4))
+                        {
+                            <div class="col-xs-6 col-sm-2 col-md-2">
+                                <p><strong>@c.Name</strong></p>
+                                <p class="text-muted">@c.Job</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

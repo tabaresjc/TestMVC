@@ -9,7 +9,8 @@ namespace JCTest
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Assets/Scripts/jquery-{version}.js"));
+                        "~/Assets/Scripts/jquery-{version}.js",
+                        "~/Assets/Scripts/app.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Assets/Scripts/jquery.validate*"));
@@ -25,7 +26,9 @@ namespace JCTest
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Assets/Styles/bootstrap-cerulean.css",
-                      "~/Assets/Styles/site.css"));
+                      "~/Assets/Styles/font-awesome.css",
+                      "~/Assets/Styles/bootstrap-social.css",
+                      "~/Assets/Styles/app.css"));
         }
     }
 }

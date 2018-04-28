@@ -1,8 +1,32 @@
 ﻿@{
     ViewBag.Title = "Movies";
     IList<JCTest.Models.Movies.MovieInfo> movies = ViewBag.movies;
+    string lang = movies.First().Language;
+    System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(lang);
 }
 
+<div class="row margin-bottom-20">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <form class="form-inline pull-right">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button id="search-clear" class="btn btn-default" type="button">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                </span>
+                <input type="text" 
+                       class="form-control" 
+                       id="searchInput"
+                       name="search" 
+                       value="@ViewBag.keyword"
+                       placeholder="Search by title...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="row">
     @foreach (var movie in movies)
     {
@@ -14,7 +38,16 @@
                         <span data-toggle="tooltip" title="Favorited">@movie.VoteAverage <i class="glyphicon glyphicon-star"></i></span>
                     </span>
                 </h4>
+                <p class="text-muted">@movie.ReleaseDate.Value.ToString("MMMM dd, yyyy", ci)</p>
                 <div class="thumbnail-image" style="background-image: url(@movie.GetPosterUrl("medium"))"></div>
+
+                <p class="overview">@movie.Overview</p>
+
+                <a href="@Url.Action("Details", "Movies", new {id=movie.Id})" class="btn btn-primary btn-block">
+                    <span class="fa fa-file-movie-o"></span>
+                    More Info
+                </a>
+
                 <div class="clearfix"></div>
             </div>
         </div>

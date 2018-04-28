@@ -24,19 +24,27 @@ namespace JCTest.Models.Movies
 
         public int CreatedCount { get; set; }
 
-        public MovieInfo Get(int movieId)
+        public MovieInfo Get(int id)
         {
-            return this.dbContext
-                .Movies
-                .Where(x => x.MovieId == movieId)
-                .FirstOrDefault();
+            return this.dbContext.Movies.Find(id);
         }
 
-        public IList<MovieInfo> GetList(int page= 1, int limit = 24, string orderby = "popularity_desc")
+        public IList<MovieInfo> GetList(
+            string keywords = null, 
+            int page= 1, 
+            int limit = 24, 
+            string orderby = "popularity_desc")
         {
             var q = this.dbContext.Movies
-                .Where(x => !x.Adult)
-                .AsEnumerable();
+                .AsEnumerable()
+                .Where(x => !x.Adult && x.ReleaseDate != null);
+
+            // filter by keywords
+            if (!string.IsNullOrWhiteSpace(keywords))
+            {
+                keywords = keywords.ToLower();
+                q = q.Where(x => x.Title.ToLower().Contains(keywords) || x.OriginalTitle.ToLower().Contains(keywords));
+            }
 
             switch (orderby)
             {

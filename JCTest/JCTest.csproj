@@ -280,11 +280,14 @@
     <Compile Include="Services\UserManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Scripts\app.js" />
+    <Content Include="Assets\Styles\bootstrap-cerulean.css" />
+    <Content Include="Assets\Styles\bootstrap-social.css" />
     <Content Include="Assets\Styles\bootstrap.css" />
-    <Content Include="Assets\Styles\bootstrap.min.css" />
     <Content Include="Assets\favicon.ico" />
+    <Content Include="Assets\Styles\font-awesome.css" />
     <Content Include="Global.asax" />
-    <Content Include="Assets\Styles\Site.css" />
+    <Content Include="Assets\Styles\app.css" />
     <Content Include="Assets\Scripts\bootstrap.js" />
     <Content Include="Assets\Scripts\bootstrap.min.js" />
     <None Include="Assets\Scripts\jquery-1.10.2.intellisense.js" />
@@ -299,6 +302,7 @@
     <Content Include="Assets\Scripts\respond.js" />
     <Content Include="Assets\Scripts\respond.min.js" />
     <Content Include="Assets\Scripts\_references.js" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -311,7 +315,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -334,6 +337,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutWide.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Shared\_LayoutAlternative.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
