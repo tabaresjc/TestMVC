@@ -5,7 +5,7 @@ using System.Web;
 
 namespace JCTest.Models.Movie
 {
-    public class Movies
+    public class Movie
     {
     }
 }

@@ -1,4 +1,6 @@
-﻿using JCTest.Interfaces;
+﻿using Hangfire;
+using Hangfire.MySql;
+using JCTest.Interfaces;
 using JCTest.Models;
 using JCTest.Services;
 using Microsoft.AspNet.Identity;
@@ -19,6 +21,18 @@ namespace JCTest
         public void Configuration(IAppBuilder app)
         {
             var ioc = UnityConfig.Container;
+
+            // Setup Hangfire
+            GlobalConfiguration
+                .Configuration
+                .UseStorage(new MySqlStorage("DefaultHangfireConnection"));
+
+            GlobalConfiguration
+                .Configuration
+                .UseActivator(new ContainerJobActivator(UnityConfig.ContainerHangfire));
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
 
             // Configure the db context to use a single instance per request
             app.CreatePerOwinContext(() =>

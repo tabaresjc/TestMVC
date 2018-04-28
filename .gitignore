@@ -295,6 +295,7 @@ __pycache__/
 *.xsd.cs
 AppSettings.config
 ConnectionStrings.config
+Nlog.config
 App_Data/
 Provisions/
 !/Extra/*

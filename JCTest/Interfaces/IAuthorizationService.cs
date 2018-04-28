@@ -1,6 +1,6 @@
 ﻿using Owin;
 
-namespace JCTest.Services
+namespace JCTest.Interfaces
 {
     public interface IAuthorizationService
     {

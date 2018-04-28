@@ -26,10 +26,23 @@ namespace JCTest
               return container;
           });
 
+        private static Lazy<IUnityContainer> containerHangfire =
+          new Lazy<IUnityContainer>(() =>
+          {
+              var container = new UnityContainer();
+              RegisterTypes(container);
+              return container;
+          });
+
         /// <summary>
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
+
+        /// <summary>
+        /// Configured Unity Container.
+        /// </summary>
+        public static IUnityContainer ContainerHangfire => containerHangfire.Value;
         #endregion
 
         /// <summary>
@@ -44,13 +57,16 @@ namespace JCTest
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            // NOTE: To load from web.config uncomment the line below.
-            // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
+            // Services
+            container.RegisterType<NLog.ILogger>(
+                new InjectionFactory((c, t, s) =>
+                {
+                    return NLog.LogManager.GetLogger("App");
+                })
+            );
 
             // Services
             container.RegisterType<ISettingsService>(
-                new PerRequestLifetimeManager(),
                 new InjectionFactory((c, t, s) => 
                 {
                     return new SettingsService(System.Configuration.ConfigurationManager.AppSettings);
@@ -61,7 +77,6 @@ namespace JCTest
             container.RegisterType<IIdentityMessageService, SmsService>("IdentityMsgSvcSMS");
 
             container.RegisterType<ApplicationDbContext>(
-                new PerRequestLifetimeManager(),
                 new InjectionFactory((c) =>
                 {
                     return new ApplicationDbContext();
@@ -69,7 +84,6 @@ namespace JCTest
             );
 
             container.RegisterType<IUserStore<ApplicationUser>>(
-                new PerRequestLifetimeManager(),
                 new InjectionFactory((c) =>
                 {
                     var ac = c.Resolve<ApplicationDbContext>();
@@ -78,7 +92,6 @@ namespace JCTest
             );
 
             container.RegisterType<UserManagerService>(
-                new PerRequestLifetimeManager(),
                 new InjectionFactory((c) =>
                 {
                     return HttpContext
@@ -89,7 +102,6 @@ namespace JCTest
             );
 
             container.RegisterType<SignInManagerService>(
-                new PerRequestLifetimeManager(),
                 new InjectionFactory((c) =>
                 {
                     return HttpContext
@@ -99,8 +111,24 @@ namespace JCTest
                 })
             );
 
-            container.RegisterType<IAuthorizationService, AuthorizationService>(
-                new PerRequestLifetimeManager());
+            container.RegisterType<IAuthorizationService, AuthorizationService>();
+
+            container.RegisterType<IMovieListUpdateService, MovieListUpdateService>();
+        }
+    }
+
+    public class ContainerJobActivator : Hangfire.JobActivator
+    {
+        private readonly IUnityContainer container;
+
+        public ContainerJobActivator(IUnityContainer container)
+        {
+            this.container = container;
+        }
+
+        public override object ActivateJob(Type type)
+        {
+            return container.Resolve(type);
         }
     }
 }
