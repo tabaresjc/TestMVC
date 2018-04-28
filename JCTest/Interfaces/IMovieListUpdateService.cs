@@ -6,6 +6,6 @@ namespace JCTest.Interfaces
 {
     public interface IMovieListUpdateService
     {
-        void FetchAndSave(string language, DateTime minimumDate, Hangfire.IJobCancellationToken cancellationToken);
+        void FetchAndSave(int year, Hangfire.IJobCancellationToken cancellationToken);
     }
 }

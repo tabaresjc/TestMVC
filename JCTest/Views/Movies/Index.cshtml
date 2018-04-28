@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Movies";
+    IList<JCTest.Models.Movies.MovieInfo> movies = ViewBag.movies;
+}
+
+<div class="row">
+    @foreach (var movie in movies)
+    {
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <div class="thumbnail">
+                <h4>
+                    @movie.Title
+                    <span class="label label-warning info">
+                        <span data-toggle="tooltip" title="Favorited">@movie.VoteAverage <i class="glyphicon glyphicon-star"></i></span>
+                    </span>
+                </h4>
+                <div class="thumbnail-image" style="background-image: url(@movie.GetPosterUrl("medium"))"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    }
+</div>

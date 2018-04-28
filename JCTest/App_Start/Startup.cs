@@ -68,6 +68,21 @@ namespace JCTest
             var authorizationService = ioc.Resolve<IAuthorizationService>();
 
             authorizationService.Setup(app);
+
+            // Use hangfire to fetch data periodically
+            RecurringJob.AddOrUpdate(
+                "MovieListUpdateService", 
+                () => RunMovieListUpdateService(new Hangfire.JobCancellationToken(false)),
+                Cron.Daily
+            );
+        }
+
+        public void RunMovieListUpdateService(Hangfire.IJobCancellationToken cancellationToken)
+        {
+            var ioc = UnityConfig.ContainerHangfire;
+            var ms = ioc.Resolve<IMovieListUpdateService>();
+
+            ms.FetchAndSave(DateTime.UtcNow.Year, cancellationToken);
         }
     }
 }

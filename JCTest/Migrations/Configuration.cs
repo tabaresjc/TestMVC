@@ -9,9 +9,8 @@ namespace JCTest.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-
             SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(JCTest.Models.ApplicationDbContext context)

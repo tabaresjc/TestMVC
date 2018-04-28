@@ -1,5 +1,7 @@
 using JCTest.Interfaces;
 using JCTest.Models;
+using JCTest.Models.Interfaces;
+using JCTest.Models.Movies;
 using JCTest.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -114,6 +116,8 @@ namespace JCTest
             container.RegisterType<IAuthorizationService, AuthorizationService>();
 
             container.RegisterType<IMovieListUpdateService, MovieListUpdateService>();
+
+            container.RegisterType<IMoviesModel, MoviesModel>();
         }
     }
 
