@@ -53,6 +53,9 @@
     <Reference Include="Hangfire.Core, Version=1.6.19.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.Core.1.6.19\lib\net45\Hangfire.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Hangfire.Dashboard.Authorization, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Dashboard.Authorization.2.1.0\lib\net45\Hangfire.Dashboard.Authorization.dll</HintPath>
+    </Reference>
     <Reference Include="Hangfire.MySql, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.MySqlStorage.1.0.5\lib\net45\Hangfire.MySql.dll</HintPath>
     </Reference>
@@ -340,6 +343,8 @@
     <Content Include="Views\Shared\_LayoutWide.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Shared\_LayoutAlternative.cshtml" />
+    <None Include="Properties\PublishProfiles\Azure - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Local - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.MySql;
 using JCTest.Interfaces;
 using JCTest.Models;
@@ -11,6 +12,8 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
 using Unity;
+using System.Linq;
+using System.Collections.Generic;
 
 [assembly: OwinStartupAttribute(typeof(JCTest.Startup))]
 
@@ -31,7 +34,16 @@ namespace JCTest
                 .Configuration
                 .UseActivator(new ContainerJobActivator(UnityConfig.ContainerHangfire));
 
-            app.UseHangfireDashboard();
+            var options = new DashboardOptions
+            {
+                AuthorizationFilters = new List<IAuthorizationFilter>
+                {
+                    new AuthorizationFilter { Roles = "Admin" },
+                    new ClaimsBasedAuthorizationFilter("name", "value")
+                }
+            };
+
+            app.UseHangfireDashboard("/hangfire", options);
             app.UseHangfireServer();
 
             // Configure the db context to use a single instance per request

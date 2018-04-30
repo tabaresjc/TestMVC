@@ -154,10 +154,7 @@ publish/
 *.publishproj
 
 # Exclude following publish profiles
-!UATWebService.pubxml
-!UATWebSite.pubxml
-!TestWebService.pubxml
-!TestWebSite.pubxml
+!Local - Web Deploy.pubxml
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
